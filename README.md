@@ -2,6 +2,7 @@
 
 ## Relevant Links
 https://trello.com/c/6LIJb7Kh/5-1-set-up-your-front-end-repository
+
 https://adoring-jang-7c3e23.netlify.app
 
 ## Logistical
@@ -61,12 +62,12 @@ https://adoring-jang-7c3e23.netlify.app
 
 Name of feature: Set-up
 Estimate of time needed to complete: 60 minutes
-Start time: _____
-Finish time: _____
-Actual time needed to complete: _____
+Start time: 11:00a
+Finish time: 11:48a
+Actual time needed to complete: 48 minutes
 
 Name of feature: Authentication
 Estimate of time needed to complete: 60 minutes
-Start time: _____
+Start time: 1:30p
 Finish time: _____
 Actual time needed to complete: _____
