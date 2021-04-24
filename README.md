@@ -67,6 +67,6 @@ Actual time needed to complete: 48 minutes
 
 Name of feature: Authentication
 Estimate of time needed to complete: 60 minutes
-Start time: _____
+Start time: 1:30p
 Finish time: _____
 Actual time needed to complete: _____
