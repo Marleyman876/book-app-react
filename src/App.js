@@ -10,14 +10,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  BrowserRouter
 } from "react-router-dom";
 
 
 class App extends React.Component {
 
   render() {
-    const { user, isAuthenticated } = this.props.auth0;
+    const {isAuthenticated } = this.props.auth0;
 
     return (
       <>
