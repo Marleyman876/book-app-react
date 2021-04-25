@@ -8,7 +8,7 @@ class Profile extends React.Component {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
-      <Card>
+      <Card style={{ width: '15rem' }}>
         {isAuthenticated ? user.name : ''}
         {isAuthenticated ? <img src={user.picture} alt={user.name} />: ' '}
       </Card>
