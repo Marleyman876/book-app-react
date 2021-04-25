@@ -3,47 +3,43 @@ import { withAuth0 } from "@auth0/auth0-react";
 import Header from './Header';
 import Login from './Login';
 import Bookshelf from './Bookshelf'
+import Profile from './Profile'
 import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  BrowserRouter
 } from "react-router-dom";
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoggedIn: false,
-    }
-  }
 
-  renderLogin = () => {
-    this.setState({
-      isLoggedIn: !this.state.isLoggedIn
-    })
-  }
+class App extends React.Component {
+
   render() {
-    console.log('app', this.props);
+    const { user, isAuthenticated } = this.props.auth0;
+
     return (
       <>
         <Router>
           <IsLoadingAndError>
             <Header
-              isLoggedIn={this.state.isLoggedIn}
+              isAuthenticated={isAuthenticated}
             />
 
             <Switch>
               <Route exact path="/">
-                <Login
-                  isLoggedIn={this.state.isLoggedIn}
-                  renderLogin={this.renderLogin}
-                />
-                {!this.state.isLoggedIn ? '' : <Bookshelf/>}
-                {/* TODO: if the user is logged in, render the `MyFavoriteBooks` component, if they are not, render the `Login` component */}
 
+                {!isAuthenticated ? <Login/> : <Bookshelf />}
+                
+                {/* TODO: if the user is logged in, render the `MyFavoriteBooks` component, if they are not, render the `Login` component */}
               </Route>
+
+              <Route exact path="/profile">
+                {!isAuthenticated ? '' : <Profile />}
+              </Route>
+
+
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
             </Switch>
             <Footer />

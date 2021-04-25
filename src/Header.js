@@ -12,7 +12,7 @@ class Header extends React.Component {
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
         <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
-        {!this.props.isLoggedIn ? '' : <LogoutButton />}
+        {!this.props.isAuthenticated ? '' : <LogoutButton />}
       </Navbar>
     );
   }
