@@ -2,7 +2,7 @@ import React from 'react';
 import { withAuth0 } from "@auth0/auth0-react";
 import Header from './Header';
 import Login from './Login';
-import Bookshelf from './Bookshelf';
+//import Bookshelf from './Bookshelf';
 import BestBooks from './BestBooks';
 import Profile from './Profile'
 import IsLoadingAndError from './IsLoadingAndError';
