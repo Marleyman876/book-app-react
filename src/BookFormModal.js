@@ -3,8 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import { withAuth0 } from "@auth0/auth0-react";
 
-export default class BookFormModal extends React.Component {
+class BookFormModal extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -16,14 +17,14 @@ export default class BookFormModal extends React.Component {
 
   handleCreateBooks = async (e) => {
     e.preventDefault();
-    const newBooks = await axios.post(`${process.env.DATABASE_URL}/books`, {
+    const newBooks = await axios.post(`${process.env.REACT_APP_DATABASE_URL}/books`, {
       name: this.state.name,
       author: this.state.author,
       description: this.state.description,
-      
+      email: this.props.auth0.user.email,
     })
-       this.props.updateBooks(newBooks.data);
-
+    this.props.updateBooks(newBooks.data);
+    this.props.closeModal();
   }
 
 
@@ -59,7 +60,6 @@ export default class BookFormModal extends React.Component {
 
           <Modal.Footer>
             <Button variant="primary" onClick={this.handleCreateBooks}>Add Book</Button>
-            <Button variant="primary" onClick={this.closeModal}>Close</Button>
           </Modal.Footer>
         </Modal.Dialog>
       </Modal>
@@ -68,4 +68,4 @@ export default class BookFormModal extends React.Component {
   }
 }
 
-
+export default withAuth0(BookFormModal);
