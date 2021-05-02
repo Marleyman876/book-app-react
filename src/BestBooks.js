@@ -33,7 +33,7 @@ class BestBooks extends React.Component {
 
   async componentDidMount() {
     try {
-      const SERVER = process.env.DATABASE_URL || 'http://localhost:3001';
+      const SERVER = process.env.REACT_APP_DATABASE_URL;
       const reader = await axios.get(`${SERVER}/books`,
         {
           params: {
@@ -47,11 +47,6 @@ class BestBooks extends React.Component {
     }
   }
   
-
-
-
-
-
   render() {
     console.log(this.state);
     return (
