@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal';
 
-import { findAllByTestId } from '@testing-library/dom';
+//import { findAllByTestId } from '@testing-library/dom';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -48,14 +48,13 @@ class BestBooks extends React.Component {
     }
   }
 
-  deleteBook = async (e) => {
-    const newBooks = await axios.delete(`${process.env.REACT_APP_DATABASE_URL}/books/:id`, {
-      name: this.state.name,
-      author: this.state.author,
-      description: this.state.description,
-      email: this.props.auth0.user.email
+  deleteBook = async (id) => {
+    const newBooks = await axios.delete(`${process.env.REACT_APP_DATABASE_URL}/books/${id}`,{
+      data: {email: this.props.auth0.user.email}
     })
-    this.props.deleteBook(newBooks.data);
+   this.setState({
+     books: newBooks.data
+   })
   }
 
 render() {
