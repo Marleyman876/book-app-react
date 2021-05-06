@@ -49,55 +49,56 @@ class BestBooks extends React.Component {
   }
 
   deleteBook = async (id) => {
-    const newBooks = await axios.delete(`${process.env.REACT_APP_DATABASE_URL}/books/${id}`,{
-      data: {email: this.props.auth0.user.email}
+    const newBooks = await axios.delete(`${process.env.REACT_APP_DATABASE_URL}/books/${id}`, {
+      data: { email: this.props.auth0.user.email }
     })
-   this.setState({
-     books: newBooks.data
-   })
+    this.setState({
+      books: newBooks.data
+    })
   }
 
-render() {
-  console.log(this.state);
-  return (
+  render() {
+    console.log(this.state);
+    return (
 
-    <>
-      <Button onClick={this.openModal}
-        variant="primary"
-        size="lg">
-        Add Book
+      <>
+        <Button onClick={this.openModal}
+          variant="primary"
+          size="lg">
+          Add Book
         </Button>
 
-      <BookFormModal
-        openModal={this.state.modalOn}
-        closeModal={this.closeModal}
-        newBooks={this.handleCreateBooks}
-        updateBooks={this.updateBooks}
-      />
+        <BookFormModal
+          openModal={this.state.modalOn}
+          closeModal={this.closeModal}
+          newBooks={this.handleCreateBooks}
+          updateBooks={this.updateBooks}
+        />
 
-      <h2>Best Books</h2>
-      {this.state.books.length > 0 &&
-        <Carousel>
-          {this.state.books.map((book) => (
-            <Carousel.Item key={book._id} style={{ width: '35rem' }}>
-              <Image
-                fluid
-                src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                alt="Book"
-              />
-              <Carousel.Caption>
-                <p>{book.name}</p>
-                <p>{book.author}</p>
-                <p>{book.description}</p>
-                <Button onClick={() => this.deleteBook(book._id)} variant="danger" size="lg">Delete</Button>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      }
-    </>
-  )
-}
+        <h2>Best Books</h2>
+        {this.state.books.length > 0 &&
+          <Carousel>
+            {this.state.books.map((book) => (
+              <Carousel.Item key={book._id} style={{ width: '35rem' }}>
+                <Image
+                  fluid
+                  src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  alt="Book"
+                />
+                <Carousel.Caption>
+                  <p>{book.name}</p>
+                  <p>{book.author}</p>
+                  <p>{book.description}</p>
+                  <Button onClick={() => this.updateBooks(book._id)} variant="primary" size="lg">Update</Button>
+                  <Button onClick={() => this.deleteBook(book._id)} variant="danger" size="lg">Delete</Button>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        }
+      </>
+    )
+  }
 }
 
 export default withAuth0(BestBooks);
