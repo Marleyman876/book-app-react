@@ -17,6 +17,7 @@ class BestBooks extends React.Component {
       name: '',
       author: '',
       description: '',
+      bookUpdates: false
     }
   };
 
@@ -27,8 +28,9 @@ class BestBooks extends React.Component {
   closeModal = () => {
     this.setState({ modalOn: false });
   }
-  updateBooks = (books) => {
-    this.setState({ books: books });
+  updateBooks = (book) => {
+    console.log('this.updateBooks')
+    this.setState({ modalOn: true, bookUpdates: book });
   }
 
   async componentDidMount() {
@@ -57,6 +59,37 @@ class BestBooks extends React.Component {
     })
   }
 
+
+  handleUpdate = async (e) => {
+    e.preventDefault();
+    console.log('handling update')
+    const {name, author, description} = e.target;
+    console.log(e.target)
+
+    this.setState({ modalOn: false, bookUpdates: false });
+
+    // const update = axios.put(`${process.env.REACT_APP_DATABASE_URL}/books/${this.state.updatingBook}`, {
+    //   name: this.state.name,
+    //   author: this.state.author,
+    //   description: this.state.description,
+    // }).then(res => {
+    //   this.setState({
+    //     books: res.data,
+    //     isUpdating: false,
+    //     name: '',
+    //     author: '',
+    //     description: ''
+        // let book = this.state.books[]
+        // this.setState({
+  //       //   name: bookToUpdate.name,
+  //       //   author: bookToUpdate.author,
+  //       //   description: bookToUpdate.description,
+  //       //   isUpdating: true
+  //     });
+  //   }
+  //   // });
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -68,13 +101,16 @@ class BestBooks extends React.Component {
           Add Book
         </Button>
 
-        <BookFormModal
+       {this.state.modalOn && <BookFormModal
           openModal={this.state.modalOn}
           closeModal={this.closeModal}
           newBooks={this.handleCreateBooks}
           updateBooks={this.updateBooks}
-        />
+          handleUpdate={this.handleUpdate}
+          bookUpdates={this.state.bookUpdates}
 
+        />
+}
         <h2>Best Books</h2>
         {this.state.books.length > 0 &&
           <Carousel>
@@ -89,7 +125,7 @@ class BestBooks extends React.Component {
                   <p>{book.name}</p>
                   <p>{book.author}</p>
                   <p>{book.description}</p>
-                  <Button onClick={() => this.updateBooks(book._id)} variant="primary" size="lg">Update</Button>
+                  <Button onClick={() => this.updateBooks(book)} variant="primary" size="lg">Update</Button>
                   <Button onClick={() => this.deleteBook(book._id)} variant="danger" size="lg">Delete</Button>
                 </Carousel.Caption>
               </Carousel.Item>
